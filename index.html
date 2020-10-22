@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Simple Javascript Calendar</title>
+  <link href="style.css" rel="stylesheet">
+  <script>
+    function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      var ampm = h >= 12 ? 'pm' : 'am';
+      h = h % 12;
+      h = h ? h : 12; // the hour '0' should be '12'
+      document.getElementById('txt').innerHTML = today.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+      });
+      document.getElementById('txt1').innerHTML = today.toLocaleString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      var t = setTimeout(startTime, 500);
+    }
+
+    function checkTime(i) {
+      if (i < 10) {
+        i = "0" + i
+      }; // add zero in front of numbers < 10
+      return i;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="front"><span>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <svg width="500" height="500" class="svg">
+        <clippath id="clip">
+          <circle cx="50" cy="50" r="50" class="a" />
+        </clippath>
+
+        <image xlink:href="https://images.unsplash.com/photo-1474575981580-1ec7944df3b2?dpr=1&auto=format&fit=crop&w=1500&h=934&q=80&cs=tinysrgb&crop=&bg=" width="1000" height="1000" x="0" y="0" class="one" />
+
+        <image xlink:href="https://images.unsplash.com/photo-1474575981580-1ec7944df3b2?dpr=1&auto=format&fit=crop&w=1500&h=934&q=80&cs=tinysrgb&crop=&bg=" width="1000" height="1000" x="0" y="0" clip-path="url(#clip)" class="two" />
+        <!-- <svg>
+        <defs>
+          <mask id="cursorMask" maskUnits="objectBoundingBox" maskContentUtils="objectBoundingBox">
+            <g>
+              <rect x="0" y="0" width="320" height="166" fill="#FFFFFF" />
+              <rect x="0" y="0" width="100" height="100" fill="#000000" />
+            </g>
+          </mask>
+        </defs>
+        <image width="320" height="166" xlink:href="https://upload.wikimedia.org/wikipedia/commons/d/d4/Firefox-33-xfce.png" />
+      </svg>-->
+        <p onload="startTime()"> </p>
+        <script src="script.js"></script>
+      </svg>
+    </span></div>
+
+  <div class="behind_container">
+    <div class="behind">
+      <div id="cal-wrap">
+        <!-- [PERIOD SELECTOR] -->
+        <div id="cal-date">
+          <div id="txt"></div>
+          <div id="txt1"></div>
+          <p id="demo1"></p>
+          <p>Please input a Date:</p>
+          <label for="">Date: </label>
+          <input id="numb">
+          <button id="cal-set" type="button" onclick="cal.list()">Go</button>
+          <span style="font-size:18px">
+            <p id="demo"></p>
+            <p id="demo2"></p>
+            <p id="demo3"></p>
+          </span>
+        </div>
+
+        <!-- [CALENDAR] -->
+        <div id="cal-container"></div>
+
+        <!-- [EVENT] -->
+        <div id="cal-event"></div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
